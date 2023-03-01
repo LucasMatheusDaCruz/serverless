@@ -1,0 +1,51 @@
+#Este arquivo cria uma tabela DynamoDB com um índice primário id, que será usada para armazenar os itens. Ele também define três funções Lambda (createItem, getItem e listItems) que serão usadas para interagir com a tabela.
+
+service: my-service
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: sa-east-1
+plugins:
+  - serverless-aws-documentation
+resources:
+  Resources:
+    myTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: my-table
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema:
+          - AttributeName: id
+            KeyType: HASH
+        BillingMode: PAY_PER_REQUEST
+functions:
+  createItem:
+    handler: handler.createItem
+    events:
+      - http:
+          path: /item
+          method: post
+    documentation:
+      summary: Create a new item
+  getItem:
+    handler: handler.getItem
+    events:
+      - http:
+          path: /item/{id}
+          method: get
+          request:
+            parameters:
+              paths:
+                id: true
+    documentation:
+      summary: Get an item by ID
+  listItems:
+    handler: handler.listItems
+    events:
+      - http:
+          path: /item
+          method: get
+    documentation:
+      summary: List all items
