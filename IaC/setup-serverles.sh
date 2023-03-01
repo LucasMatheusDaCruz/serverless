@@ -58,3 +58,8 @@ curl https://0000000.execute-api.sa-east-1.amazonaws.com/dev/item
 
 
 #Serviço Serverless que usa o AWS Lambda, o DynamoDB e a API Gateway para criar, obter e listar itens em uma tabela.
+
+
+
+
+#Arquivo serverless-iac.yml contém todo o código em um arquivo YAML para ser utilizado como Infraestrutura como Código (IaC) usando o Serverless Framework.
