@@ -15,7 +15,7 @@ module.exports.createItem = async (event) => {
 
   await dynamoDB
     .put({
-      TableName: process.env.TABLE_NAME,
+      TableName: process.env.TEXT,
       Item: item,
     })
     .promise();
@@ -31,7 +31,7 @@ module.exports.getItem = async (event) => {
 
   const result = await dynamoDB
     .get({
-      TableName: process.env.TABLE_NAME,
+      TableName: process.env.TEXT,
       Key: {
         id,
       },
@@ -54,7 +54,7 @@ module.exports.getItem = async (event) => {
 module.exports.listItems = async () => {
   const result = await dynamoDB
     .scan({
-      TableName: process.env.TABLE_NAME,
+      TableName: process.env.TEXT,
     })
     .promise();
 
